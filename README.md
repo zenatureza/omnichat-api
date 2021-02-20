@@ -1,6 +1,16 @@
 # omnichat-api
 
-A aplicação consiste em um CRUD de 'posts' que seriam postagens feitas por um usário, contendo título e descrição. Ela também permite a criação de usuários e autenticação, após o usuário for cadastrado.
+A aplicação consiste em um CRUD de 'posts' que seriam postagens feitas por um usário, contendo título e descrição. Ela também permite a criação de usuários e autenticação, após o usuário for cadastrado. O banco de dados utilizado foi o sqlite, por praticidade.
+
+## Variáveis ambiente
+
+Crie um arquivo .env na raíz do projeto chamado '.env'. Para adicionar as variáveis ambiente necessárias, basta copiar o conteúdo do .env.example e atribuir valores a cada uma.
+
+- NODE_ENV: Define o ambiente em que o programa está rodando
+- APP_SECRET: Define o segredo a ser usado para geração e validação dos tokens jwt
+- DATABASE_NAME: Define o nome do banco de dados a ser utilizado
+- LOGGER_ALL_FILE: Especifica o caminho onde os arquivos de log de qualquer tipo serão armazenados (e.g. logs/all.log)
+- LOGGER_ERRORS_FILE: Especifica o caminho onde os arquivos de log de erro serão armazenados
 
 ## Como rodar o programa
 
@@ -21,6 +31,14 @@ yarn typeorm migration:run
 
 # Roda o servidor de desenvolvimento
 yarn dev:server
+```
+
+## Testes
+
+Para rodar os testes basta executar o seguinte comando na raiz do projeto:
+
+```shell
+yarn test
 ```
 
 ## Como usar a API
