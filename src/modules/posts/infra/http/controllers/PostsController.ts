@@ -1,39 +1,45 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+
 import CreatePostService from '@modules/posts/services/CreatePostService';
+import GetPostService from '@modules/posts/services/GetPostService';
+import GetPagedPostsService from '@modules/posts/services/GetPagedPostsService';
+import UpdatePostService from '@modules/posts/services/UpdatePostService';
+import DeletePostService from '@modules/posts/services/DeletePostService';
 
 export default class PostsController {
-  // TODO: [GET]
+  // [GET] /posts?page=${page}&take=${take}
   public async index(request: Request, response: Response): Promise<Response> {
-    const { title, description } = request.body;
+    const { page = 1 }: any = request.query;
+    const { take } = request.query;
+    const user_id = request.user.id;
 
-    const createPostService = container.resolve(CreatePostService);
+    const params: any = { page, user_id };
+    if (take) {
+      params['take'] = parseInt(take as any);
+    }
 
-    const post = await createPostService.execute({
-      title,
-      description,
-    });
+    const getPagedPostsService = container.resolve(GetPagedPostsService);
+    const posts = await getPagedPostsService.execute(params);
 
-    return response.json({ post });
+    return response.json({ posts });
   }
 
-  // TODO: [GET/:id]
+  // [GET] /posts/:id
   public async get(request: Request, response: Response): Promise<Response> {
-    const { title, description } = request.body;
+    const { id } = request.params;
+    const user_id = request.user.id;
 
-    const createPostService = container.resolve(CreatePostService);
+    const getPostService = container.resolve(GetPostService);
 
-    const post = await createPostService.execute({
-      title,
-      description,
-    });
+    const post = await getPostService.execute({ id, user_id });
 
     return response.json({ post });
   }
 
-  // TODO: deve salvar o id do usuario
-  // TODO: [POST]
+  // [POST] /posts
   public async create(request: Request, response: Response): Promise<Response> {
+    const user_id = request.user.id;
     const { title, description } = request.body;
 
     const createPostService = container.resolve(CreatePostService);
@@ -41,36 +47,39 @@ export default class PostsController {
     const post = await createPostService.execute({
       title,
       description,
+      user_id,
     });
 
     return response.json({ post });
   }
 
-  // TODO: [PUT/:id]
+  // [PUT] /posts/:id
   public async update(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
     const { title, description } = request.body;
+    const user_id = request.user.id;
 
-    const createPostService = container.resolve(CreatePostService);
+    const updatePostService = container.resolve(UpdatePostService);
 
-    const post = await createPostService.execute({
+    const post = await updatePostService.execute({
       title,
       description,
+      id,
+      user_id,
     });
 
     return response.json({ post });
   }
 
-  // TODO: [DELETE/:id]
+  // [DELETE] /posts/:id
   public async delete(request: Request, response: Response): Promise<Response> {
-    const { title, description } = request.body;
+    const { id } = request.params;
+    const user_id = request.user.id;
 
-    const createPostService = container.resolve(CreatePostService);
+    const deletePostService = container.resolve(DeletePostService);
 
-    const post = await createPostService.execute({
-      title,
-      description,
-    });
+    await deletePostService.execute({ id, user_id });
 
-    return response.json({ post });
+    return response.json({});
   }
 }

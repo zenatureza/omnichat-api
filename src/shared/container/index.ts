@@ -1,5 +1,6 @@
 import PostsRepository from '@modules/posts/infra/typeorm/repositories/PostsRepository';
 import IPostsRepository from '@modules/posts/repositories/IPostsRepository';
+import CheckIfUserOwnsPostService from '@modules/posts/services/CheckIfUserOwnsPostService';
 import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import BCryptHashProvider from '@shared/infra/providers/HashProvider/implementations/BCryptHashProvider';
@@ -16,4 +17,9 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IPostsRepository>(
   'PostsRepository',
   PostsRepository,
+);
+
+container.registerSingleton<CheckIfUserOwnsPostService>(
+  'CheckIfUserOwnsPostService',
+  CheckIfUserOwnsPostService,
 );
