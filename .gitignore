@@ -13,3 +13,5 @@ tmp/*
 
 # database/
 *.sqlite
+
+logs

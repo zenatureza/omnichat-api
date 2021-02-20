@@ -10,22 +10,29 @@ import routes from './routes';
 
 import '@shared/infra/typeorm';
 import '@shared/container';
+import { container } from 'tsyringe';
+import HttpLogger from './middlewares/httpLogger';
+const httpLogger = container.resolve(HttpLogger);
 
 const app = express();
 
 app.use(express.json());
+app.use(httpLogger.getHttpLoggerHandler());
+
 app.use(routes);
 
 app.use(errors());
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {
+    httpLogger.getLogger().error(err.message);
+
     return response
       .status(err.statusCode)
       .json({ status: 'error', message: err.message });
   }
 
-  console.error(err);
+  httpLogger.getLogger().error(err.message);
 
   return response
     .status(500)
