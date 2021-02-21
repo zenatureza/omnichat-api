@@ -20,7 +20,6 @@ postsRouter.post(
   postsController.create,
 );
 
-// TODO: deve validar se o post dado pelo id da request é do usuário vindo do token
 postsRouter.get(
   '/',
   celebrate({

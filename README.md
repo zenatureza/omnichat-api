@@ -12,7 +12,11 @@ Crie um arquivo .env na raíz do projeto chamado '.env'. Para adicionar as vari�
 - LOGGER_ALL_FILE: Especifica o caminho onde os arquivos de log de qualquer tipo serão armazenados (e.g. logs/all.log)
 - LOGGER_ERRORS_FILE: Especifica o caminho onde os arquivos de log de erro serão armazenados
 
-## Como rodar o programa
+## Como rodar o programa [produção]
+
+A api está disponível em: https://omnichat-api.herokuapp.com. Para saber os endpoints disponíveis, verifique o capítulo abaixo 'Como usar a API'.
+
+## Como rodar o programa [desenvolvimento]
 
 Primeiramente instale o gerenciador de pacotes yarn (https://classic.yarnpkg.com/en/docs/install/), o Node.js (https://nodejs.org/en/download/) e o git (https://git-scm.com/downloads). Depois em um terminal rode os seguintes comandos para executar o programa:
 
