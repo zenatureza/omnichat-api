@@ -27,7 +27,7 @@ cd omnichat-api
 yarn install
 
 # Gera o arquivo necessário para as migrations
-cp ormconfig.example.json ormconfig.json
+cp ormconfig.example.dev.json ormconfig.json
 
 # Inicializa o banco de dados
 yarn typeorm migration:run

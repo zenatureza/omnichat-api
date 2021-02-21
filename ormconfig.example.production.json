@@ -1,0 +1,10 @@
+{
+  "type": "sqlite",
+  "database": "omnichat.sqlite",
+  "entities": ["dist/modules/**/infra/typeorm/entities/*.entity.{ts,js}"],
+  "migrations": ["dist/shared/infra/typeorm/migrations/*.{ts,js}"],
+  "synchronize": false,
+  "cli": {
+    "migrationsDir": "dist/shared/infra/typeorm/migrations"
+  }
+}

@@ -1,12 +1,14 @@
 import { ConnectionOptions } from 'typeorm';
 
+const baseDir = process.env.NODE_ENV !== 'development' ? 'dist' : 'src';
+
 const config: ConnectionOptions = {
   type: 'sqlite',
   database: process.env.POSTGRES_DATABASE ?? 'omnichat.sqlite',
-  entities: ['./src/modules/**/infra/typeorm/entities/*.entity.{ts,js}'],
-  migrations: ['./src/database/migrations/*.ts'],
+  entities: [`./${baseDir}/modules/**/infra/typeorm/entities/*.entity.{ts,js}`],
+  migrations: [`./${baseDir}/database/migrations/*.{ts,js}`],
   cli: {
-    migrationsDir: './src/database/migrations',
+    migrationsDir: `./${baseDir}/database/migrations`,
   },
   // logging: true,
 };
