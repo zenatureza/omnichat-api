@@ -48,7 +48,7 @@ class PostsRepository implements IPostsRepository {
   }
 
   public async delete(post: Post): Promise<void> {
-    await this.ormRepository.delete(post);
+    await this.ormRepository.remove(post);
     return;
   }
 }

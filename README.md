@@ -26,6 +26,9 @@ cd omnichat-api
 # Instala os pacotes necessários
 yarn install
 
+# Gera o arquivo necessário para as migrations
+cp ormconfig.example.json ormconfig.json
+
 # Inicializa o banco de dados
 yarn typeorm migration:run
 
@@ -42,6 +45,8 @@ yarn test
 ```
 
 ## Como usar a API
+
+Como dito anteriormente, a api gerencia posts de usuários, e por isso é necessário antes de criar ou editar um post, que os usuários existam. Então, deve-se primeiramente criar um usuário, usando o método _POST na rota /users_ (ver abaixo com mais detalhes). Depois do usuário existir, é necessário que esse usuário se autentique na aplicação, para isso basta utilizar o método _POST na rota /sessions_ para criar uma sessão e obter um token para realizar as requisições. Com o token obtido agora sim é possível gerenciar posts, criar, editar, obter informações ou excluir, todas essas ações estão descritas abaixo.
 
 As rotas disponíveis são:
 
